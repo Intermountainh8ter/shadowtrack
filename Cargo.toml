@@ -1,0 +1,25 @@
+[package]
+name = "shadowtrack"
+version = "0.0.1"
+edition = "2021"
+license = "MIT"
+description = "Shadow-mode behavioral diff for model/prompt/framework upgrades, with pre-registered agreement gate and bootstrap CIs."
+repository = "https://github.com/Intermountainh8ter/shadowtrack"
+keywords = ["llm", "regression", "shadow-mode", "agent", "upgrade"]
+categories = ["command-line-utilities", "science"]
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+anyhow = "1"
+rand = "0.8"
+rand_pcg = "0.3"
+
+[[bin]]
+name = "shadowtrack"
+path = "src/main.rs"
+
+[lib]
+name = "shadowtrack"
+path = "src/lib.rs"
