@@ -1,0 +1,16 @@
+{
+  "n_files": 8,
+  "rustc": "rustc 1.98.1 (48a229cea 2026-09-01)",
+  "sha256": {
+    "shadowtrack/examples/local-qwen3/profile-ablated-self.json": "4b10fb855ef84d02beee3b32a9a72d049a19a82306cb969d5b4d7cca4de14d8b",
+    "shadowtrack/examples/local-qwen3/profile-stock-self.json": "de36094ceadb13541b4186de2489670ec11471f307b24857e0d3217ef89b0edc",
+    "shadowtrack/examples/local-qwen3/profile-stock-vs-ablated.json": "9916d89a3ce052a63667a9764c02cf62a149ae095415acbbfd80e2f8791a4c02",
+    "shadowtrack/results/local-qwen3/INPUT-HASHES.txt": "a99f14a986c4f65756ec50a00e5e70487379382a90704226f0cc756082d1036d",
+    "shadowtrack/results/local-qwen3/capability-ablated-self.pairs.json": "c4381df729ff7142a12b8043c5cd37854c0991d0666a3f01b12764864e6b49b4",
+    "shadowtrack/results/local-qwen3/capability-audit.json": "ab9259f8c966a38aa3c05835c977ca786a78a7881a198e527c6eab9f93b3ffbc",
+    "shadowtrack/results/local-qwen3/capability-stock-self.pairs.json": "8c615ee17e6c3b48b48a68ca4e3fa0f3eae268abb82fb0336948dbe7e1a94dbc",
+    "shadowtrack/results/local-qwen3/capability-stock-vs-ablated.pairs.json": "d682c4e0325e6df75469f9ffcb5be550f9497bad0b0b85322ef859f1c91c7079"
+  },
+  "tool": "bench-report 0.1.0",
+  "unix_time": 1792173436
+}

@@ -1,0 +1,24 @@
+{
+  "n_pairs": 100,
+  "pair_rate": 0.88,
+  "pair_ci_lo": 0.81,
+  "pair_ci_hi": 0.94,
+  "floor": 0.9,
+  "safe_to_upgrade": false,
+  "a_self": {
+    "label": "A",
+    "rate": 0.92,
+    "ci_lo": 0.86,
+    "ci_hi": 0.97,
+    "n": 100
+  },
+  "b_self": {
+    "label": "B",
+    "rate": 0.98,
+    "ci_lo": 0.95,
+    "ci_hi": 1.0,
+    "n": 100
+  },
+  "self_agreement_confound": false,
+  "confound_label": null
+}

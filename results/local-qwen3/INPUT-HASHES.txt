@@ -1,0 +1,4 @@
+65c4412a9f080864dde5110cec7b77e9b59a85644b787138e6144c6d43f2b44d  /tmp/claude-1000/-home-ammo/6f685fbc-bf84-4442-9e76-64ae676a9244/scratchpad/prompts/capability.jsonl
+4b10fb855ef84d02beee3b32a9a72d049a19a82306cb969d5b4d7cca4de14d8b  shadowtrack/examples/local-qwen3/profile-ablated-self.json
+de36094ceadb13541b4186de2489670ec11471f307b24857e0d3217ef89b0edc  shadowtrack/examples/local-qwen3/profile-stock-self.json
+9916d89a3ce052a63667a9764c02cf62a149ae095415acbbfd80e2f8791a4c02  shadowtrack/examples/local-qwen3/profile-stock-vs-ablated.json

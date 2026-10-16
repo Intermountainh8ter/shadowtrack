@@ -1,0 +1,407 @@
+{
+  "grader": "normalized",
+  "n": 100,
+  "pairs": [
+    {
+      "agree": true,
+      "prompt_id": "C-0000"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0001"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0002"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0003"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0004"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0005"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0006"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0007"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0008"
+    },
+    {
+      "agree": false,
+      "prompt_id": "C-0009"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0010"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0011"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0012"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0013"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0014"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0015"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0016"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0017"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0018"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0019"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0020"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0021"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0022"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0023"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0024"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0025"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0026"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0027"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0028"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0029"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0030"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0031"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0032"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0033"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0034"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0035"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0036"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0037"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0038"
+    },
+    {
+      "agree": false,
+      "prompt_id": "C-0039"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0040"
+    },
+    {
+      "agree": false,
+      "prompt_id": "C-0041"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0042"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0043"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0044"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0045"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0046"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0047"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0048"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0049"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0050"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0051"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0052"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0053"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0054"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0055"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0056"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0057"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0058"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0059"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0060"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0061"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0062"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0063"
+    },
+    {
+      "agree": false,
+      "prompt_id": "C-0064"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0065"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0066"
+    },
+    {
+      "agree": false,
+      "prompt_id": "C-0067"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0068"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0069"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0070"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0071"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0072"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0073"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0074"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0075"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0076"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0077"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0078"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0079"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0080"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0081"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0082"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0083"
+    },
+    {
+      "agree": false,
+      "prompt_id": "C-0084"
+    },
+    {
+      "agree": false,
+      "prompt_id": "C-0085"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0086"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0087"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0088"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0089"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0090"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0091"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0092"
+    },
+    {
+      "agree": false,
+      "prompt_id": "C-0093"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0094"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0095"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0096"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0097"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0098"
+    },
+    {
+      "agree": true,
+      "prompt_id": "C-0099"
+    }
+  ],
+  "profile": "qwen3-4b-stock-self"
+}
