@@ -42,6 +42,28 @@ enum Cmd {
         #[arg(long, default_value_t = 0.9)]
         floor: f64,
     },
+    /// Sample both sides of a live A/B profile for every prompt, grade
+    /// each pair with a built-in scripted grader, and write a
+    /// `{"pairs": [...]}` document for `score` / `audit`. Raw outputs
+    /// are kept only if `--outputs` names a file.
+    Sample {
+        /// JSON `ShadowProfile` (a_url, b_url, prompt_field,
+        /// output_json_path, body_template, ...).
+        #[arg(long)]
+        profile: std::path::PathBuf,
+        /// JSON-Lines prompts, one `{"prompt_id": "...", "prompt": "..."}` per line.
+        #[arg(long)]
+        prompts: std::path::PathBuf,
+        /// Destination pairs JSON.
+        #[arg(long)]
+        out: std::path::PathBuf,
+        /// `exact` (byte-identical) or `normalized` (whitespace/ASCII-case folded).
+        #[arg(long, default_value = "normalized")]
+        grader: String,
+        /// Optional path to also write the raw `Outputs` (keep out of git).
+        #[arg(long)]
+        outputs: Option<std::path::PathBuf>,
+    },
     Version,
 }
 
@@ -102,6 +124,42 @@ fn main() -> anyhow::Result<()> {
             } else if !safe {
                 std::process::exit(1);
             }
+        }
+        Cmd::Sample {
+            profile,
+            prompts,
+            out,
+            grader,
+            outputs,
+        } => {
+            let p: shadowtrack::http::ShadowProfile =
+                serde_json::from_str(&std::fs::read_to_string(&profile)?)?;
+            let rows: Vec<shadowtrack::http::PromptRow> = std::fs::read_to_string(&prompts)?
+                .lines()
+                .filter(|l| !l.trim().is_empty())
+                .map(serde_json::from_str)
+                .collect::<Result<_, _>>()?;
+            let outs = shadowtrack::http::sample_pairs(&p, &rows)?;
+            let pairs = match grader.as_str() {
+                "exact" => shadowtrack::grade_all(&shadowtrack::ExactMatchGrader, &outs),
+                "normalized" => shadowtrack::grade_all(&shadowtrack::NormalizedMatchGrader, &outs),
+                other => anyhow::bail!("unknown grader {other:?}; use exact or normalized"),
+            };
+            if let Some(path) = outputs {
+                std::fs::write(&path, serde_json::to_string_pretty(&outs)?)?;
+            }
+            let doc = serde_json::json!({
+                "profile": p.name,
+                "grader": grader,
+                "n": pairs.len(),
+                "pairs": pairs,
+            });
+            std::fs::write(&out, serde_json::to_string_pretty(&doc)?)?;
+            println!(
+                "sampled {} prompts; agreement = {:.4}",
+                pairs.len(),
+                agreement_rate(&pairs)
+            );
         }
         Cmd::Version => println!("shadowtrack {}", env!("CARGO_PKG_VERSION")),
     }

@@ -18,6 +18,13 @@ pub struct ShadowProfile {
     #[serde(default = "default_prompt_field")]
     pub prompt_field: String,
     pub output_json_path: String,
+    /// Request body the prompt is written into at `prompt_field` (a
+    /// `/`-separated path, e.g. `messages/0/content`). Carries fixed
+    /// sampling parameters so both sides see identical settings. Absent
+    /// or null means an empty object, i.e. the body is `{prompt_field:
+    /// prompt}`.
+    #[serde(default)]
+    pub body_template: serde_json::Value,
     #[serde(default)]
     pub api_key_env: Option<String>,
     #[serde(default = "default_timeout_s")]
@@ -114,8 +121,9 @@ pub async fn sample_pairs_async(
         })?;
     let mut out = Vec::with_capacity(prompts.len());
     for row in prompts {
-        let a = fetch_text(&client, "a", &profile.a_url, auth.as_deref(), &profile.prompt_field, &row.prompt, &profile.output_json_path, profile.max_retries).await?;
-        let b = fetch_text(&client, "b", &profile.b_url, auth.as_deref(), &profile.prompt_field, &row.prompt, &profile.output_json_path, profile.max_retries).await?;
+        let body = request_body(&profile.body_template, &profile.prompt_field, &row.prompt);
+        let a = fetch_text(&client, "a", &profile.a_url, auth.as_deref(), &body, &profile.output_json_path, profile.max_retries).await?;
+        let b = fetch_text(&client, "b", &profile.b_url, auth.as_deref(), &body, &profile.output_json_path, profile.max_retries).await?;
         out.push(Outputs {
             prompt_id: row.prompt_id.clone(),
             a,
@@ -125,18 +133,75 @@ pub async fn sample_pairs_async(
     Ok(out)
 }
 
-#[allow(clippy::too_many_arguments)]
+fn request_body(template: &serde_json::Value, prompt_field: &str, prompt: &str) -> serde_json::Value {
+    let mut body = match template {
+        serde_json::Value::Object(_) => template.clone(),
+        _ => serde_json::json!({}),
+    };
+    set_at_path(&mut body, prompt_field, serde_json::Value::String(prompt.to_string()));
+    body
+}
+
+/// Write `value` at a `/`-separated path, creating intermediate objects.
+/// Arrays along the path must already exist in the template; an index
+/// past the end appends.
+fn set_at_path(root: &mut serde_json::Value, path: &str, value: serde_json::Value) {
+    let segs: Vec<&str> = path.trim_matches('/').split('/').filter(|s| !s.is_empty()).collect();
+    if segs.is_empty() {
+        *root = value;
+        return;
+    }
+    let mut cur = root;
+    for seg in &segs[..segs.len() - 1] {
+        cur = match cur {
+            serde_json::Value::Array(arr) => {
+                let i: usize = seg.parse().unwrap_or(arr.len());
+                if i >= arr.len() {
+                    arr.push(serde_json::json!({}));
+                }
+                let i = i.min(arr.len() - 1);
+                &mut arr[i]
+            }
+            other => {
+                if !other.is_object() {
+                    *other = serde_json::json!({});
+                }
+                other
+                    .as_object_mut()
+                    .expect("object")
+                    .entry((*seg).to_string())
+                    .or_insert_with(|| serde_json::json!({}))
+            }
+        };
+    }
+    let last = segs[segs.len() - 1];
+    match cur {
+        serde_json::Value::Array(arr) => {
+            let i: usize = last.parse().unwrap_or(arr.len());
+            if i < arr.len() {
+                arr[i] = value;
+            } else {
+                arr.push(value);
+            }
+        }
+        other => {
+            if !other.is_object() {
+                *other = serde_json::json!({});
+            }
+            other.as_object_mut().expect("object").insert(last.to_string(), value);
+        }
+    }
+}
+
 async fn fetch_text(
     client: &reqwest::Client,
     side: &'static str,
     url: &str,
     auth: Option<&str>,
-    prompt_field: &str,
-    prompt: &str,
+    body: &serde_json::Value,
     output_path: &str,
     max_retries: u32,
 ) -> Result<String, SampleError> {
-    let body = serde_json::json!({ prompt_field: prompt });
     let mut attempt: u32 = 0;
     loop {
         attempt += 1;
@@ -205,6 +270,7 @@ mod tests {
             b_url: format!("{b}/run"),
             prompt_field: "prompt".into(),
             output_json_path: "text".into(),
+            body_template: serde_json::Value::Null,
             api_key_env: None,
             timeout_s: 2,
             max_retries: 2,

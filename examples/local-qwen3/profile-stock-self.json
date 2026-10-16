@@ -1,0 +1,10 @@
+{
+  "name": "qwen3-4b-stock-self",
+  "a_url": "http://127.0.0.1:8081/v1/chat/completions",
+  "b_url": "http://127.0.0.1:8081/v1/chat/completions",
+  "prompt_field": "messages/0/content",
+  "output_json_path": "choices/0/message/content",
+  "body_template": {"messages":[{"role":"user","content":""}],"temperature":0,"max_tokens":128,"seed":42},
+  "timeout_s": 120,
+  "max_retries": 3
+}
