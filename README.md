@@ -22,7 +22,17 @@ whether the chat-template bytes shifted.
 
 - `Pair`, `agreement_rate`, `agreement_bootstrap_ci`,
   `safe_to_upgrade`.
-- `shadowtrack score` CLI.
+- `SelfBaseline` + `self_baseline(label, pairs, iters, seed)` →
+  `Option<SelfBaseline>`: pre-reg §5's per-endpoint self-agreement
+  baseline, from a Vec of A-vs-A (or B-vs-B) paired re-runs. Absent
+  baseline is `None` at the type level — no NaN in JSON.
+- `ShadowReport` + `audit(pairs, a_self, b_self, floor, iters, seed)`:
+  full audit with pair agreement, both baselines, and the pre-reg §5
+  confound flag (a self-agreement CI upper bound below the pair floor
+  means that endpoint is non-deterministic enough that the "unsafe"
+  verdict cannot be blamed on the upgrade).
+- CLI: `shadowtrack score` (back-compat), `shadowtrack audit`. Exit
+  codes: 0 safe, 1 unsafe, 2 self-agreement confound.
 - `docs/PREREGISTRATION.md` locking the gate.
 
 Not in this commit (openly tracked):
