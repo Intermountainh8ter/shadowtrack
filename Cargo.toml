@@ -1,6 +1,7 @@
 [package]
 name = "shadowtrack"
-version = "0.0.1"
+version = "0.1.0"
+authors = ["Intermountainh8ter"]
 edition = "2021"
 license = "MIT"
 description = "Shadow-mode behavioral diff for model/prompt/framework upgrades, with pre-registered agreement gate and bootstrap CIs."
