@@ -158,6 +158,74 @@ pub fn audit(
     }
 }
 
+/// Deterministic scripted grader (pre-reg §2 "no LLM judges"): given
+/// the two systems' outputs on one prompt, returns whether they agree.
+/// Implementors are repo-committed functions; the fixture author
+/// documents the specific "agreement" definition in
+/// `fixtures/<name>_grader.md`.
+pub trait Grader {
+    fn agree(&self, prompt_id: &str, a: &str, b: &str) -> bool;
+}
+
+/// Built-in grader: byte-identical strings agree.
+pub struct ExactMatchGrader;
+
+impl Grader for ExactMatchGrader {
+    fn agree(&self, _prompt_id: &str, a: &str, b: &str) -> bool {
+        a == b
+    }
+}
+
+/// Built-in grader: strings agree after normalizing surrounding
+/// whitespace and ASCII casing. The fixture author documents in
+/// `fixtures/<name>_grader.md` why this normalization is appropriate.
+pub struct NormalizedMatchGrader;
+
+impl Grader for NormalizedMatchGrader {
+    fn agree(&self, _prompt_id: &str, a: &str, b: &str) -> bool {
+        normalize(a) == normalize(b)
+    }
+}
+
+fn normalize(s: &str) -> String {
+    let mut out = String::with_capacity(s.len());
+    let mut prev_space = true;
+    for c in s.chars() {
+        if c.is_whitespace() {
+            if !prev_space {
+                out.push(' ');
+                prev_space = true;
+            }
+        } else {
+            for lc in c.to_lowercase() {
+                out.push(lc);
+            }
+            prev_space = false;
+        }
+    }
+    out.trim_end().to_string()
+}
+
+/// Paired output for one prompt — the inputs a `Grader` consumes.
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct Outputs {
+    pub prompt_id: String,
+    pub a: String,
+    pub b: String,
+}
+
+/// Apply a scripted grader to a batch of paired outputs, producing the
+/// `Pair` sequence the audit expects.
+pub fn grade_all<G: Grader>(grader: &G, outputs: &[Outputs]) -> Vec<Pair> {
+    outputs
+        .iter()
+        .map(|o| Pair {
+            prompt_id: o.prompt_id.clone(),
+            agree: grader.agree(&o.prompt_id, &o.a, &o.b),
+        })
+        .collect()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -239,5 +307,49 @@ mod tests {
         let s = serde_json::to_string(&r).unwrap();
         let r2: ShadowReport = serde_json::from_str(&s).unwrap();
         assert_eq!(r, r2);
+    }
+
+    #[test]
+    fn exact_match_grader_byte_identity_only() {
+        let g = ExactMatchGrader;
+        assert!(g.agree("x", "hello", "hello"));
+        assert!(!g.agree("x", "hello", "Hello"));
+        assert!(!g.agree("x", "hello ", "hello"));
+    }
+
+    #[test]
+    fn normalized_match_grader_handles_whitespace_and_case() {
+        let g = NormalizedMatchGrader;
+        assert!(g.agree("x", "Hello  World", "hello world"));
+        assert!(g.agree("x", "  Hi\tthere  ", "hi there"));
+        assert!(!g.agree("x", "hello world", "hello there"));
+    }
+
+    #[test]
+    fn grade_all_builds_pair_sequence_from_outputs() {
+        let outputs = vec![
+            Outputs { prompt_id: "p0".into(), a: "x".into(), b: "x".into() },
+            Outputs { prompt_id: "p1".into(), a: "x".into(), b: "y".into() },
+            Outputs { prompt_id: "p2".into(), a: "x".into(), b: "x".into() },
+        ];
+        let pairs = grade_all(&ExactMatchGrader, &outputs);
+        assert_eq!(pairs.len(), 3);
+        assert!(pairs[0].agree);
+        assert!(!pairs[1].agree);
+        assert!(pairs[2].agree);
+    }
+
+    #[test]
+    fn custom_grader_implementable_by_user_code() {
+        struct JsonValueGrader;
+        impl Grader for JsonValueGrader {
+            fn agree(&self, _p: &str, a: &str, b: &str) -> bool {
+                serde_json::from_str::<serde_json::Value>(a).ok()
+                    == serde_json::from_str::<serde_json::Value>(b).ok()
+            }
+        }
+        let g = JsonValueGrader;
+        assert!(g.agree("x", "{\"a\":1}", " { \"a\" : 1 } "));
+        assert!(!g.agree("x", "{\"a\":1}", "{\"a\":2}"));
     }
 }
