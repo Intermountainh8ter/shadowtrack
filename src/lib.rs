@@ -5,6 +5,8 @@
 //! bootstrap CI. The pre-registered "safe to upgrade" gate is on the
 //! lower bound of the agreement CI.
 
+pub mod http;
+
 use rand::SeedableRng;
 use rand_pcg::Pcg64Mcg;
 use serde::{Deserialize, Serialize};
