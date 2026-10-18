@@ -1,0 +1,21 @@
+{
+  "limit": null,
+  "model_file_sha256": {
+    "llama-3.1-8b-instruct": "9da71c45c90a821809821244d4971e5e5dfad7eb091f0b8ff0546392393b6283",
+    "qwen3-4b-stock": "377104ddffa29e86d956061cc200e6be39704f996bcd3764fc0a02b89236dbe7"
+  },
+  "prompt_file_sha256": {
+    "benign": "a4e31a3125687e81026f65dde5000550378fd616cf0a6cce8fc0724a77ed977b",
+    "jailbreakbench": "5ea633c5902c62abd07720e0efdecf0fc0f005dafc4d5362edb3d7c8c8ef967f"
+  },
+  "sampling": {
+    "seed": 42,
+    "temperature": 0.0,
+    "top_k": 1,
+    "top_p": 1.0
+  },
+  "server_path": "/home/ammo/bench/llama.cpp/build-hip/bin/llama-server",
+  "server_version": "version: 0.6.0-dev (build 1, commit 091b6a7)",
+  "started_utc": "1792315967",
+  "study": "docs/STUDY-serving-determinism.md"
+}

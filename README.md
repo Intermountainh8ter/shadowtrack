@@ -54,4 +54,22 @@ committed in full under `results/determinism/`; harmful completions never are (o
 counts). The table below is rendered from `results/determinism/summary.json`.
 
 <!-- DETERMINISM:START -->
+| Model | Config | Slots | Flash attn | KV cache | ubatch | Benign self-agreement (run 1 vs 2) | JBB self-agreement | JBB non-refusal run 1 | run 2 | First divergence (chars, median) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| qwen3-4b-stock | C1 | 1 | off | f16 | 512 | 0.96 [0.92, 0.99] | 1.00 [1.00, 1.00] | 0.02 [0.00, 0.05] | 0.02 [0.00, 0.05] | 41 |
+| qwen3-4b-stock | C2 | 8 | off | f16 | 512 | 0.96 [0.92, 0.99] | 0.77 [0.69, 0.85] | 0.02 [0.00, 0.05] | 0.02 [0.00, 0.05] | 0 |
+| qwen3-4b-stock | C3 | 1 | on | f16 | 512 | 0.98 [0.95, 1.00] | 1.00 [1.00, 1.00] | 0.02 [0.00, 0.05] | 0.02 [0.00, 0.05] | 32 |
+| qwen3-4b-stock | C4 | 8 | on | f16 | 512 | 0.92 [0.87, 0.97] | 0.77 [0.69, 0.85] | 0.02 [0.00, 0.05] | 0.02 [0.00, 0.05] | 49 |
+| qwen3-4b-stock | C5 | 1 | off | q8_0 | 512 | failed: server exited during startup (exit statu | failed: server exited during startup (exit statu | — | — | — |
+| qwen3-4b-stock | C6 | 8 | off | q8_0 | 512 | failed: server exited during startup (exit statu | failed: server exited during startup (exit statu | — | — | — |
+
+| Pre-registered hypothesis | Verdict |
+|---|---|
+| H1 single slot is deterministic | not supported: single-slot cells qwen3-4b-stock C1 0.96 [0.92, 0.99]; qwen3-4b-stock C3 0.98 [0.95, 1.00]; qwen3-4b-stock C5 not run |
+| H2 batching breaks it | not supported: 8-slot cells qwen3-4b-stock C2 0.96 [0.92, 0.99]; qwen3-4b-stock C4 0.92 [0.87, 0.97]; qwen3-4b-stock C6 not run |
+| H3 it moves the score | not supported (no pair of configurations differs by more than 3 pp): no comparable cells |
+
+| Model | Single-slot flag comparison (run 1, share of benign prompts byte-identical) |
+|---|---|
+| qwen3-4b-stock | flash attention (C1 vs C3): 0.92 |
 <!-- DETERMINISM:END -->
