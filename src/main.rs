@@ -64,6 +64,31 @@ enum Cmd {
         #[arg(long)]
         outputs: Option<std::path::PathBuf>,
     },
+    /// Run the serving-determinism study (docs/STUDY-serving-determinism.md): one server at a
+    /// time, each configuration twice on both prompt sets; writes one JSON per cell.
+    Determinism {
+        #[arg(long)]
+        study: std::path::PathBuf,
+        #[arg(long)]
+        server: std::path::PathBuf,
+        #[arg(long)]
+        out_dir: std::path::PathBuf,
+        /// Scratch directory for server logs and harmful transcripts (outside the repo).
+        #[arg(long)]
+        scratch_dir: std::path::PathBuf,
+        #[arg(long, default_value_t = 8120)]
+        port: u16,
+        /// HIP_VISIBLE_DEVICES value for the server.
+        #[arg(long, default_value = "0")]
+        gpu: String,
+        #[arg(long)]
+        only_model: Option<String>,
+        #[arg(long)]
+        only_config: Option<String>,
+        /// Smoke-test only: cap prompts per set (results with a limit are not study evidence).
+        #[arg(long)]
+        limit: Option<usize>,
+    },
     Version,
 }
 
@@ -160,6 +185,9 @@ fn main() -> anyhow::Result<()> {
                 pairs.len(),
                 agreement_rate(&pairs)
             );
+        }
+        Cmd::Determinism { study, server, out_dir, scratch_dir, port, gpu, only_model, only_config, limit } => {
+            shadowtrack::determinism::run(shadowtrack::determinism::RunArgs { study, server, out_dir, scratch_dir, port, gpu, only_model, only_config, limit })?;
         }
         Cmd::Version => println!("shadowtrack {}", env!("CARGO_PKG_VERSION")),
     }

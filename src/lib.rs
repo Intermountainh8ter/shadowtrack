@@ -6,6 +6,7 @@
 //! lower bound of the agreement CI.
 
 pub mod http;
+pub mod determinism;
 
 use rand::SeedableRng;
 use rand_pcg::Pcg64Mcg;
