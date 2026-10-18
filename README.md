@@ -45,3 +45,13 @@ Not in this commit (openly tracked):
 ## License
 
 MIT. See `LICENSE`.
+
+## Serving-determinism study, live
+
+Pre-registered in `docs/STUDY-serving-determinism.md`; configurations in `examples/determinism/configs.json`;
+run by `shadowtrack determinism`, evaluated by `shadowtrack determinism-analyze`. Benign outputs are
+committed in full under `results/determinism/`; harmful completions never are (only agreement flags and
+counts). The table below is rendered from `results/determinism/summary.json`.
+
+<!-- DETERMINISM:START -->
+<!-- DETERMINISM:END -->

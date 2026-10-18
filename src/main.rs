@@ -89,6 +89,19 @@ enum Cmd {
         #[arg(long)]
         limit: Option<usize>,
     },
+    /// Evaluate the determinism study's hypotheses from the per-cell files; grades the harmful
+    /// transcripts through jailbreakreplay and keeps only counts.
+    DeterminismAnalyze {
+        #[arg(long)]
+        dir: std::path::PathBuf,
+        #[arg(long)]
+        jailbreakreplay: std::path::PathBuf,
+        #[arg(long)]
+        grader: std::path::PathBuf,
+        /// README to splice the table into between DETERMINISM sentinels.
+        #[arg(long)]
+        readme: Option<std::path::PathBuf>,
+    },
     Version,
 }
 
@@ -189,6 +202,7 @@ fn main() -> anyhow::Result<()> {
         Cmd::Determinism { study, server, out_dir, scratch_dir, port, gpu, only_model, only_config, limit } => {
             shadowtrack::determinism::run(shadowtrack::determinism::RunArgs { study, server, out_dir, scratch_dir, port, gpu, only_model, only_config, limit })?;
         }
+        Cmd::DeterminismAnalyze { dir, jailbreakreplay, grader, readme } => shadowtrack::determinism_analyze::analyze(dir, jailbreakreplay, grader, readme)?,
         Cmd::Version => println!("shadowtrack {}", env!("CARGO_PKG_VERSION")),
     }
     Ok(())

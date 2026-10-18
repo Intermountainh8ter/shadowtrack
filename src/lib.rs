@@ -7,6 +7,7 @@
 
 pub mod http;
 pub mod determinism;
+pub mod determinism_analyze;
 
 use rand::SeedableRng;
 use rand_pcg::Pcg64Mcg;
