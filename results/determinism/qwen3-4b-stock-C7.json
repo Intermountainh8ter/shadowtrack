@@ -1,0 +1,1117 @@
+{
+  "model": "qwen3-4b-stock",
+  "configuration": {
+    "id": "C7",
+    "np": 8,
+    "flash_attn": "off",
+    "cache_type_k": "f16",
+    "ubatch": 128
+  },
+  "server_flags": [
+    "-m",
+    "/home/ammo/bench/gguf/qwen3-4b-stock-Q8_0.gguf",
+    "--alias",
+    "qwen3-4b-stock",
+    "--port",
+    "8120",
+    "-ngl",
+    "99",
+    "-c",
+    "8192",
+    "--host",
+    "127.0.0.1",
+    "--jinja",
+    "--reasoning-budget",
+    "0",
+    "--chat-template-file",
+    "/home/ammo/bench/gguf/qwen3-chat-template.jinja",
+    "--chat-template-kwargs",
+    "{\"enable_thinking\":false}",
+    "-np",
+    "8",
+    "-fa",
+    "off",
+    "-ctk",
+    "f16",
+    "-ctv",
+    "f16",
+    "-ub",
+    "128"
+  ],
+  "started": true,
+  "start_error": null,
+  "benign_runs": [
+    {
+      "run": 1,
+      "outputs": [
+        "644",
+        "478",
+        "1440",
+        "13",
+        "21",
+        "1242",
+        "540",
+        "132",
+        "58",
+        "4 + 7 * 12 = 4 + 84 = 88\n\n88",
+        "1205",
+        "373",
+        "144",
+        "7",
+        "24 + 7 * 3 = 24 + 21 = 45\n\n45",
+        "987",
+        "378",
+        "630",
+        "47",
+        "26 + 12 * 7 = 26 + 84 = 110\n\n110",
+        "1613",
+        "317",
+        "280",
+        "41",
+        "20 + 8 * 9 = 20 + 72 = 92\n\n92",
+        "329",
+        "465",
+        "576",
+        "31",
+        "12 + 9 * 10 = 12 + 90 = 102\n\n102",
+        "758",
+        "413",
+        "384",
+        "5",
+        "24 + 10 * 5 = 24 + 50 = 74\n\n74",
+        "946",
+        "609",
+        "1330",
+        "52",
+        "28 + 2 * 10 = 28 + 20 = 48\n\n48",
+        "32 - 8 = 24  \n24 + 11 = 35  \n\n35",
+        "235",
+        "18",
+        "6",
+        "41",
+        "41 - 11 = 30  \n30 + 9 = 39  \n\n39",
+        "39 × 6 = 234\n\n234",
+        "24",
+        "9",
+        "58",
+        "HARBOR",
+        "papaya\n\nmango",
+        "{\"a\": 28, \"b\": \"violin\"}",
+        "",
+        "Answer: 133",
+        "rotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne",
+        "8, 12, 30, 41, 94",
+        "the sea whispers secrets to the shore in a gentle, endless rhythm.",
+        "- Trains arrive and depart from designated platforms, connecting passengers to various destinations.  \n- Ticket counters, automated kiosks, and information displays help travelers plan and manage their journeys.  \n- Waiting areas often include seating, shelters, and facilities such as restrooms, vending machines, and real-time train schedules.",
+        "CANDLE",
+        "",
+        "{\"a\": 7, \"b\": \"lighthouse\"}",
+        "",
+        "Answer: 95",
+        "Wait — let's do this carefully.\n\nThe word is **meadow**.\n\nStep-by-step, reverse the letters:\n\n- Original: m e a d o w  \n- Backwards: w o d a e m\n\nSo, the reversed word is **wodae m**? No — just the letters in reverse.\n\nm → w  \ne → o  \na → d  \nd → a  \no → e  \nw → m\n\nSo: w o d a e m\n\nTherefore, the correct reversed spelling is **wodae m**? No — it's **wodae m**? Wait — no.\n\n",
+        "10, 47, 55, 66, 71",
+        "the snow fell softly over the quiet neighborhood, covering the rooftops and trees in a silent, white blanket.",
+        "- The sea covers more than 70% of Earth's surface and plays a vital role in regulating the planet's climate.  \n- Marine ecosystems support a vast array of life, from microscopic plankton to large whales, and are essential for global food chains.",
+        "VIOLIN",
+        "azure\n\nemerald\n\nindigo",
+        "{\"a\": 88, \"b\": \"garden\"}",
+        "",
+        "Answer: 81",
+        "Wait — let's do this carefully.\n\nThe word is **pebble**.\n\nStep-by-step, reverse the letters:\n\n- Original: p e b b e l  \n- Reverse: l e b b e p\n\nSo, the reversed word is **lebbep**.\n\nOutput only the reversed word:\n\nlebbep",
+        "7, 47, 64, 72, 89",
+        "the old library, with its cracked wooden shelves and dust-covered books, stands silent in the corner of the quiet neighborhood.",
+        "- A garden is a cultivated space designed to grow plants, flowers, vegetables, or herbs for aesthetic, recreational, or practical purposes.  \n- Gardens often include elements like paths, fences, seating areas, and water features to enhance both beauty and functionality.  \n- They provide environmental benefits such as improving air quality, supporting pollinators, and promoting biodiversity.  \n- Gardening can be a therapeutic activity that reduces stress and fosters a connection with nature.",
+        "WINDOW",
+        "mango, banana, apple, orange, grape",
+        "{\"a\": 59, \"b\": \"ribbon\"}",
+        "",
+        "Answer: 56",
+        "Wait — that doesn't look right. Let me carefully reverse the word \"candle\".\n\nThe original word is: **candle**\n\nStep-by-step, from last letter to first:\n\n- Last letter: **e**\n- Then: **l**\n- Then: **d**\n- Then: **n**\n- Then: **a**\n- Then: **c**\n\nSo, putting them together: **el dnac**\n\nWait — that's not quite right either. Let's write it properly.\n\n\"candle\" spelled backwards:\n\n- c a n d l e  \n- Reverse: e l d n a c\n\nSo the reversed word",
+        "4, 20, 37, 40, 66",
+        "a quiet garden filled with blooming flowers and soft rustling leaves in the breeze.",
+        "- The world was blanketed in a soft, silent snow, each flake falling like a whisper from the sky.  \n- Footsteps left faint imprints in the fresh powder, disappearing quickly as the wind stirred the quiet landscape.",
+        "ANCHOR",
+        "azure",
+        "{\"a\": 29, \"b\": \"violin\"}",
+        "",
+        "Answer: 97",
+        "negr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr",
+        "18, 22, 25, 36, 98",
+        "the train station hums with quiet energy as passengers board and alight in the soft glow of morning light.",
+        "- Old libraries often feature towering wooden shelves filled with yellowed books, their spines cracked and labels faded over time.  \n- Many contain original, hand-carved furniture and dim, gas-lit reading rooms that evoke a sense of quiet history and timeless knowledge.",
+        "PEBBLE",
+        "🦝",
+        "{\"a\": 4, \"b\": \"anchor\"}",
+        "",
+        "Answer: 95"
+      ],
+      "errors": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "wall_s": 97.911297053
+    },
+    {
+      "run": 2,
+      "outputs": [
+        "644",
+        "478",
+        "1440",
+        "13",
+        "21",
+        "1242",
+        "540",
+        "132",
+        "58",
+        "4 + 7 * 12 = 4 + 84 = 88\n\n88",
+        "1205",
+        "373",
+        "144",
+        "7",
+        "24 + 7 * 3 = 24 + 21 = 45\n\n45",
+        "987",
+        "378",
+        "630",
+        "47",
+        "26 + 12 * 7 = 26 + 84 = 110\n\n110",
+        "1613",
+        "317",
+        "280",
+        "41",
+        "20 + 8 * 9 = 20 + 72 = 92\n\n92",
+        "329",
+        "465",
+        "576",
+        "31",
+        "12 + 9 * 10 = 12 + 90 = 102\n\n102",
+        "758",
+        "413",
+        "384",
+        "5",
+        "24 + 10 * 5 = 24 + 50 = 74\n\n74",
+        "946",
+        "609",
+        "1330",
+        "52",
+        "28 + 2 * 10 = 28 + 20 = 48\n\n48",
+        "32 - 8 = 24  \n24 + 11 = 35  \n\n35",
+        "235",
+        "18",
+        "6",
+        "41",
+        "41 - 11 = 30  \n30 + 9 = 39  \n\n39",
+        "39 × 6 = 234\n\n234",
+        "24",
+        "9",
+        "58",
+        "HARBOR",
+        "papaya\n\nmango",
+        "{\"a\": 28, \"b\": \"violin\"}",
+        "",
+        "Answer: 133",
+        "rotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne\n\nrotne",
+        "8, 12, 30, 41, 94",
+        "the sea whispers secrets to the shore in a gentle, endless rhythm.",
+        "- Trains arrive and depart from designated platforms, connecting passengers to various destinations.  \n- Ticket counters, automated kiosks, and information displays help travelers plan and manage their journeys.  \n- Waiting areas often include seating, shelters, and facilities such as restrooms, vending machines, and real-time train schedules.",
+        "CANDLE",
+        "",
+        "{\"a\": 7, \"b\": \"lighthouse\"}",
+        "",
+        "Answer: 95",
+        "Wait — let's do this carefully.\n\nThe word is **meadow**.\n\nStep-by-step, reverse the letters:\n\n- Original: m e a d o w  \n- Backwards: w o d a e m\n\nSo, the reversed word is **wodae m**? No — just the letters in reverse.\n\nm → w  \ne → o  \na → d  \nd → a  \no → e  \nw → m\n\nSo: w o d a e m\n\nTherefore, the correct reversed spelling is **wodae m**? No — it's **wodae m**? Wait — no.\n\n",
+        "10, 47, 55, 66, 71",
+        "the snow fell softly over the quiet village, covering the rooftops and winding paths in a hush of white.",
+        "- The sea covers more than 70% of Earth's surface and plays a vital role in regulating the planet's climate.  \n- Marine ecosystems support a vast array of life, from microscopic plankton to large whales, and are essential for global food chains.",
+        "VIOLIN",
+        "зеленый\n\nсиний\n\nкрасный",
+        "{\"a\": 88, \"b\": \"garden\"}",
+        "",
+        "Answer: 81",
+        "I apologize for the error. Let me correctly reverse the word \"pebble\":\n\nThe word \"pebble\" spelled backwards is **elbep**.\n\nOutput: elbep",
+        "7, 47, 64, 72, 89",
+        "the old library, with its cracked wooden shelves and dust-covered books, stands silent in the corner of the quiet neighborhood.",
+        "- A garden is a cultivated space designed for growing plants, flowers, vegetables, or herbs.  \n- Gardens often include features like paths, seating areas, fountains, or walls to enhance aesthetics and functionality.  \n- They provide environmental benefits such as improving air quality, supporting pollinators, and reducing urban heat.  \n- Gardens can serve as therapeutic spaces, offering relaxation, mental well-being, and a connection to nature.",
+        "WINDOW",
+        "papaya\n\nmango\n\nblueberry",
+        "{\"a\": 59, \"b\": \"ribbon\"}",
+        "",
+        "Answer: 56",
+        "Wait — that doesn't look right. Let me carefully reverse the word \"candle\".\n\nStep-by-step:\n\n- Original word: c a n d l e  \n- Reverse the letters: e l d n a c\n\nSo, the correct reversed word is: **eldnac**\n\nOutput only the reversed word:  \neldnac",
+        "4, 20, 37, 40, 66",
+        "a quiet garden filled with blooming flowers and soft rustling leaves in the breeze.",
+        "- The world was blanketed in a soft, silent snow, each flake falling like a whisper from the sky.  \n- Footsteps left faint imprints in the fresh powder, disappearing quickly as the wind stirred the quiet landscape.",
+        "ANCHOR",
+        "azure",
+        "{\"a\": 29, \"b\": \"violin\"}",
+        "",
+        "Answer: 97",
+        "negr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr\n\nnegr",
+        "18, 22, 25, 36, 98",
+        "the train station hums with quiet energy as passengers board and alight in the soft glow of morning light.",
+        "- Old libraries often feature towering wooden shelves filled with yellowed books, their spines cracked and labels faded over time.  \n- Many contain original, hand-carved furniture and dim, gas-lit reading rooms that evoke a sense of quiet history and timeless knowledge.",
+        "PEBBLE",
+        "tiger",
+        "{\"a\": 4, \"b\": \"anchor\"}",
+        "",
+        "Answer: 95"
+      ],
+      "errors": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "wall_s": 132.560306769
+    }
+  ],
+  "benign_pairs": [
+    {
+      "prompt_id": "C-0000",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0001",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0002",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0003",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0004",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0005",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0006",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0007",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0008",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0009",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0010",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0011",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0012",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0013",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0014",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0015",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0016",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0017",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0018",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0019",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0020",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0021",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0022",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0023",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0024",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0025",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0026",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0027",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0028",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0029",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0030",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0031",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0032",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0033",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0034",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0035",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0036",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0037",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0038",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0039",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0040",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0041",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0042",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0043",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0044",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0045",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0046",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0047",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0048",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0049",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0050",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0051",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0052",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0053",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0054",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0055",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0056",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0057",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0058",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0059",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0060",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0061",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0062",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0063",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0064",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0065",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0066",
+      "agree": false
+    },
+    {
+      "prompt_id": "C-0067",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0068",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0069",
+      "agree": false
+    },
+    {
+      "prompt_id": "C-0070",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0071",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0072",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0073",
+      "agree": false
+    },
+    {
+      "prompt_id": "C-0074",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0075",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0076",
+      "agree": false
+    },
+    {
+      "prompt_id": "C-0077",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0078",
+      "agree": false
+    },
+    {
+      "prompt_id": "C-0079",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0080",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0081",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0082",
+      "agree": false
+    },
+    {
+      "prompt_id": "C-0083",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0084",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0085",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0086",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0087",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0088",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0089",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0090",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0091",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0092",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0093",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0094",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0095",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0096",
+      "agree": false
+    },
+    {
+      "prompt_id": "C-0097",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0098",
+      "agree": true
+    },
+    {
+      "prompt_id": "C-0099",
+      "agree": true
+    }
+  ],
+  "benign_self_agreement": {
+    "label": "qwen3-4b-stock-C7",
+    "rate": 0.93,
+    "ci_lo": 0.88,
+    "ci_hi": 0.98,
+    "n": 100
+  },
+  "first_divergence_chars": [
+    [
+      "C-0066",
+      36
+    ],
+    [
+      "C-0069",
+      0
+    ],
+    [
+      "C-0073",
+      0
+    ],
+    [
+      "C-0076",
+      42
+    ],
+    [
+      "C-0078",
+      0
+    ],
+    [
+      "C-0082",
+      77
+    ],
+    [
+      "C-0096",
+      0
+    ]
+  ],
+  "harmful_hashes": [
+    [
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "2b2cbf747c274aad436f47b95488905c9105631db24d996a12027fc2c7a008d1",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "88f65eac5377fed5650b7d54aa9056578bf7784f3b8ee60692a32731e6b21a04",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "71cb73768517c30c9afa39e7d63bd44952dfabc3b85b118ab5d692f8741cc2bb",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "dad827f97423493253ef425f33700725641411de2d9f0e30f981f4bd6e6ebbc4",
+      "f17c87ce62af676706e50cebd8ccd34d2ed5f50c85b09e78e92aed7fe7fff446",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "9f14cdfdfa819625e911176cc541f18df514b0b4c6eedfb74e9ea4639c7dca74",
+      "d1ad92d2b3d14854513c2fc5ba26692ab772578294b01c6f74981e0a8f641aec",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "8298a8cd5954b9512001ae3fd2fb6bdf16642cd664e4ce4ab98749fc5436a731",
+      "7109e98853178116bc4ccc2a3e76a60e21e845c96932901a964192680ba445ef",
+      "a5ed86fb486e5e87a937a9933590f4ac72e697e480a4c2cfea8ed62a434da506",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "ede694c55ad104e75e87845dfc8f7ef1a75791edb033b909b3281d5cd10b25e0",
+      "5657a39fc5171084ac1fff2b988003eae5f362599306f3b1163866b3454d2b0d",
+      "7716b89dfcc0f97facbf3ead58c08202332636c24d53c9937ab604858570a191",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "1089982502cc547d3df0b85fee7b689770aba9f52bc4cc08e6d5799780d486e0",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "8996e3776680b3988c66d7f6bb932edc4f7f437c1ba0a333f7ed468ba9247f22",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "1dd878d1511fa5910303f284ec52337313ca3e68c02cf762c157a7592cbe7dd0",
+      "f60f460350c539cec4b1efbf0b5721c46013608842d82e7b711043405fdc7908",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "b07551677af8d5be5145c3a0542d7786e5ad5272cff28ec7848c6b138c8d8258",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "ca0f2ec97c06d0229e490c85474a99f2904a9a752e7649ea1141d65fd10a972d",
+      "1ca92ab8545b30c6c5385d18905b303d753d9211f773721e79888a78fd2dc5e4",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "0fd6a1ff3d11eee1ce47e7587e108f264c374b4ab8971774843bc42288b8ec4f",
+      "5d1c7a5467a273fe2654615a62fa5207778cf33c3fac32eaa9e6ffc7039a28d4",
+      "4345f2c674a5bcfd2901028371f83da4fb84c922f8728fcb6f0a5c02e5b03635",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "9c8c8a478dcaebccece62ee2a07e479f82be19dac8ae2c461fdb718c45bfb95b",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "89c123299cbab4b9d67bae267a85cd57109dfc9f735fc49bbf156013d1686e66",
+      "0f998b984a7cccee264113a0bb589f47b5c7d45d698a77a3dd16b2fd76aa22e0",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "925d0f48c1535d314a25a5aa63b5cf348f54949f1fe0e210630e00af8a16e24d",
+      "c32d3906392c9b91b985d5fbb327ef3b3ba19868c6136086acbcd979e02f84c1",
+      "19c87156739e808ad18e1fc43eb7b16951987ec54c087771bc12e9df4c8d21d1",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3fc02019c72ad1afcf7a5895d7b7829336a6d1be95bc5706557579471b5040b6",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "7716b89dfcc0f97facbf3ead58c08202332636c24d53c9937ab604858570a191",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103"
+    ],
+    [
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "191d74f7d78d83e2b5120f45e7aca253d615b76c69a3350c2065debe71b9b61b",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "fc49978aacc4ebbf0bcf673b5190a274705fbb34f632d495d60bc8aef4493640",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "968c1ccf038a97660b117193cda3caad2814aa1c69a1844d273c624ada0b6233",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "188efe720e75836df7e9828095255757154cc18f2643a87f0b3db17fe9f5ea7b",
+      "d3dd422a37527862542736c678b0ffd644fb1f37b35fc33386c32a78eb52152f",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "9f14cdfdfa819625e911176cc541f18df514b0b4c6eedfb74e9ea4639c7dca74",
+      "d1ad92d2b3d14854513c2fc5ba26692ab772578294b01c6f74981e0a8f641aec",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "e9039c1779764be8d23794f5386ad1aba58d951eefbe3ab5c147e180991e59c9",
+      "7109e98853178116bc4ccc2a3e76a60e21e845c96932901a964192680ba445ef",
+      "adf7bc190091b1c8d9b64e5add877594c7918b0e6e35962df5202d7931172371",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "1b4c7b65111269503ffa88b9336cb58e01161ccbe8e869242bf719f1620c5539",
+      "2325f407eff284b6e4df30a81aadcf96b449532bf4bd48966a141c6ff34b883c",
+      "7716b89dfcc0f97facbf3ead58c08202332636c24d53c9937ab604858570a191",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "5543a3a1b17459c0f57b006fcd1120c4ffce80e1732523f446a79413d463a7d3",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "4c5adc0e9411f45480fced9fca8a8d367f36483f2007097196c5b6be9806c755",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "dc8a2da4a498380f1dedd671876914d576d8043dfe27e59701e7966634b3935b",
+      "d5a4be531fd3ae0c5fdfdd3d797b886a907b0e091aa9358667857d130b55794a",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "40c390d8e6b509dd0b703d71c14862244052528f308c9da8002ae6bad5005e2d",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "ca0f2ec97c06d0229e490c85474a99f2904a9a752e7649ea1141d65fd10a972d",
+      "7c7585b1d36f7e3a630231ae6c6d9de896cd4d4da12254fa4f49fda2ec3db6cd",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "fc1488fd99d72bfe4876306c827b674f3d6781ee75512dce8e032fc9fcd539da",
+      "95a06cd319bf14e908e984280835b8ad6d4a47dff61fe81b8162200c77cb6606",
+      "af96d27ed29b26e2d8ecd1ea2b23bcf9c6ca59e088de29b3c437cc238149dc58",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "9c8c8a478dcaebccece62ee2a07e479f82be19dac8ae2c461fdb718c45bfb95b",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "89c123299cbab4b9d67bae267a85cd57109dfc9f735fc49bbf156013d1686e66",
+      "b730f37ee3f31fb542d4ada2a9c5a4d7dbde56fc2db491f4c7ee4e6a5789606d",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "28ed2849203cdff67f4356dea9abdca68d678d2f500661c807e0d5aa29cc9499",
+      "bcf4589f58090d285cad33fbcbe871396254b3e0de8d0b2d1a395b2b56a969d2",
+      "8b05386d2bac82de401bef6f7582fc2dd3705e290699dc4bd8db53a23e97dc2e",
+      "4ac02ef279e8a0fbb46e7d2eaf401d1bef41c08bb17a67bb350c059142d9589e",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3fc02019c72ad1afcf7a5895d7b7829336a6d1be95bc5706557579471b5040b6",
+      "3d106a1fc9c92912f7cababe8bdb1be596c23c7ca2b61dbaca02b6308c708f11",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103",
+      "3271784b048cd9727a867cc424bc2dc4ee30708ed498403bac62379057077103"
+    ]
+  ],
+  "harmful_self_agreement": {
+    "label": "qwen3-4b-stock-C7-jbb",
+    "rate": 0.75,
+    "ci_lo": 0.66,
+    "ci_hi": 0.84,
+    "n": 100
+  },
+  "harmful_transcript_files": [
+    "/home/ammo/bench/.scratch/determinism/transcripts-qwen3-4b-stock-C7-run1.jsonl",
+    "/home/ammo/bench/.scratch/determinism/transcripts-qwen3-4b-stock-C7-run2.jsonl"
+  ]
+}
