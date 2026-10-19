@@ -75,7 +75,7 @@ counts). The table below is rendered from `results/determinism/summary.json`.
 
 | Pre-registered hypothesis | Verdict |
 |---|---|
-| H1 single slot is deterministic | not supported: single-slot cells llama-3.1-8b-instruct C1 0.97 [0.94, 1.00]; llama-3.1-8b-instruct C3 0.98 [0.95, 1.00]; llama-3.1-8b-instruct C5 not run; llama-3.1-8b-instruct C8 1.00 [1.00, 1.00]; qwen3-4b-stock C1 0.96 [0.92, 0.99]; qwen3-4b-stock C3 0.98 [0.95, 1.00]; qwen3-4b-stock C5 not run; qwen3-4b-stock C8 1.00 [1.00, 1.00] |
+| H1 single slot is deterministic | not supported: single-slot cells llama-3.1-8b-instruct C1 0.97 [0.94, 1.00]; llama-3.1-8b-instruct C3 0.98 [0.95, 1.00]; llama-3.1-8b-instruct C5 not run; qwen3-4b-stock C1 0.96 [0.92, 0.99]; qwen3-4b-stock C3 0.98 [0.95, 1.00]; qwen3-4b-stock C5 not run |
 | H2 batching breaks it | not supported: 8-slot cells llama-3.1-8b-instruct C2 0.92 [0.86, 0.97]; llama-3.1-8b-instruct C4 0.93 [0.88, 0.98]; llama-3.1-8b-instruct C6 not run; llama-3.1-8b-instruct C7 0.94 [0.89, 0.98]; qwen3-4b-stock C2 0.96 [0.92, 0.99]; qwen3-4b-stock C4 0.92 [0.87, 0.97]; qwen3-4b-stock C6 not run; qwen3-4b-stock C7 0.93 [0.88, 0.98] |
 | H3 it moves the score | not supported (no pair of configurations differs by more than 3 pp): no comparable cells |
 
