@@ -89,3 +89,9 @@ on every request and nothing else changed (one slot, flash attention off, f16 KV
   `cache_prompt` value in the cell file and the README table gains a "Prompt cache" column.
 - This is a pilot for the error-budget study drafted in `~/Desktop/Research Deep Dive.md`; it
   does not change H1 to H3 above, whose verdicts stand on C1 to C7.
+
+**C8 first attempt (2026-10-19, discarded, no trial completed).** The runner was launched from a
+shell without the gfx906 ROCm environment (`~/projects/gpu-harness/env.sh`), so each server
+answered `/health` and then crashed in rocBLAS on the first request; all 400 requests per model
+failed at transport level. The two cell files held zero completed trials and were deleted before
+the rerun; nothing about the cell changed.
