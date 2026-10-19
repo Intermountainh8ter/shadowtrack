@@ -16,6 +16,6 @@
   },
   "server_path": "/home/ammo/bench/llama.cpp/build-hip/bin/llama-server",
   "server_version": "version: 0.6.0-dev (build 1, commit 091b6a7)",
-  "started_utc": "1792315967",
+  "started_utc": "1792427648",
   "study": "docs/STUDY-serving-determinism.md"
 }
