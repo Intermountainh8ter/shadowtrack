@@ -19,7 +19,7 @@ struct CellIn {
     harmful_transcript_files: Vec<String>,
 }
 #[derive(Deserialize, Serialize, Clone)]
-struct Cfg { id: String, np: u32, flash_attn: String, cache_type_k: String, ubatch: u32, #[serde(default)] cache_prompt: Option<bool> }
+struct Cfg { id: String, np: u32, flash_attn: String, cache_type_k: String, ubatch: u32, #[serde(default)] cache_prompt: Option<bool>, #[serde(default)] chat_template: Option<String>, #[serde(default)] model_quant: Option<String>, #[serde(default)] device: Option<String> }
 #[derive(Deserialize)]
 struct RunIn { outputs: Vec<String>, errors: Vec<Option<String>>, wall_s: f64 }
 
@@ -32,6 +32,7 @@ pub struct CellOut {
     pub cache_type_k: String,
     pub ubatch: u32,
     pub cache_prompt: Option<bool>,
+    pub registered: bool,
     pub started: bool,
     pub start_error: Option<String>,
     pub benign_self_agreement: Option<crate::SelfBaseline>,
@@ -103,6 +104,7 @@ pub fn analyze(dir: PathBuf, jailbreakreplay: PathBuf, grader: PathBuf, readme: 
         if let Some(r) = c.benign_runs.first() { run1.insert((c.model.clone(), c.configuration.id.clone()), r.outputs.clone()); }
         cells.push(CellOut {
             model: c.model.clone(), id: c.configuration.id.clone(), np: c.configuration.np, flash_attn: c.configuration.flash_attn.clone(), cache_type_k: c.configuration.cache_type_k.clone(), ubatch: c.configuration.ubatch, cache_prompt: c.configuration.cache_prompt,
+            registered: c.configuration.cache_prompt.is_none() && c.configuration.chat_template.is_none() && c.configuration.model_quant.is_none() && c.configuration.device.is_none(),
             started: c.started, start_error: c.start_error.clone(),
             benign_self_agreement: c.benign_self_agreement.clone(),
             benign_request_errors: c.benign_runs.iter().map(|r| r.errors.iter().filter(|e| e.is_some()).count()).sum(),
@@ -117,7 +119,7 @@ pub fn analyze(dir: PathBuf, jailbreakreplay: PathBuf, grader: PathBuf, readme: 
 
     // Hypotheses H1 to H3 are evaluated over the study's registered cells only; a cell that sets
     // `cache_prompt` (the C8 pilot) is reported in the table but never enters a verdict.
-    let study_cells: Vec<&CellOut> = cells.iter().filter(|c| c.cache_prompt.is_none()).collect();
+    let study_cells: Vec<&CellOut> = cells.iter().filter(|c| c.registered).collect();
     // H1: every single-slot cell (np == 1) has rate 1.00 and ci_lo >= 0.97, both models.
     let single: Vec<&CellOut> = study_cells.iter().copied().filter(|c| c.np == 1).collect();
     let h1_ok = !single.is_empty() && single.iter().all(|c| c.benign_self_agreement.as_ref().map(|s| s.rate >= 1.0 && s.ci_lo >= 0.97).unwrap_or(false));

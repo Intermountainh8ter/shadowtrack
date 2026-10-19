@@ -45,6 +45,35 @@ pub struct Configuration {
     /// Per-request `cache_prompt` sent to the server; None leaves the server default (on).
     #[serde(default)]
     pub cache_prompt: Option<bool>,
+    /// "shipped" uses the GGUF's embedded template (no template flags); None or "shared" keeps the study's common flags.
+    #[serde(default)]
+    pub chat_template: Option<String>,
+    /// Replaces the `Q8_0` part of the model file name, e.g. "Q4_K_M"; the resolved file and its hash are recorded per cell.
+    #[serde(default)]
+    pub model_quant: Option<String>,
+    /// Passed as `--device`, e.g. "none" for a CPU-only arm.
+    #[serde(default)]
+    pub device: Option<String>,
+}
+
+impl Configuration {
+    /// A cell that sets any pilot or error-budget dimension is not one of the registered
+    /// determinism cells and never enters the H1 to H3 verdicts.
+    pub fn is_registered_determinism_cell(&self) -> bool {
+        self.cache_prompt.is_none() && self.chat_template.is_none() && self.model_quant.is_none() && self.device.is_none()
+    }
+}
+
+/// The model file a cell actually loads: the model's file with `Q8_0` replaced by `model_quant` when set.
+pub fn resolved_model_file(model: &Model, cfg: &Configuration) -> anyhow::Result<String> {
+    let base = expand(&model.file);
+    match &cfg.model_quant {
+        None => Ok(base),
+        Some(q) => {
+            anyhow::ensure!(base.contains("Q8_0"), "model_quant set but model file name has no Q8_0 to replace: {base}");
+            Ok(base.replace("Q8_0", q))
+        }
+    }
 }
 
 #[derive(Deserialize, Serialize, Clone)]
@@ -77,6 +106,8 @@ pub struct Cell {
     pub model: String,
     pub configuration: Configuration,
     pub server_flags: Vec<String>,
+    pub model_file: String,
+    pub model_file_sha256: Option<String>,
     pub started: bool,
     pub start_error: Option<String>,
     /// prompt set -> per-run outputs (benign only; harmful sets carry hashes, see `harmful_hashes`).
@@ -122,22 +153,24 @@ fn load_prompts(path: &str, n: usize) -> anyhow::Result<Vec<(String, String)>> {
     Ok(out)
 }
 
-fn server_flags(study: &Study, model: &Model, cfg: &Configuration, port: u16) -> Vec<String> {
+fn server_flags(study: &Study, model: &Model, cfg: &Configuration, port: u16, model_file: &str) -> Vec<String> {
     let mut f: Vec<String> = Vec::new();
-    f.extend(["-m".to_string(), expand(&model.file), "--alias".into(), model.alias.clone(), "--port".into(), port.to_string()]);
+    f.extend(["-m".to_string(), model_file.to_string(), "--alias".into(), model.alias.clone(), "--port".into(), port.to_string()]);
+    let shipped = cfg.chat_template.as_deref() == Some("shipped");
     // common flags, minus the Qwen template pair when the model brings its own template
     let mut i = 0;
     let c = &study.common_flags;
     while i < c.len() {
         let k = &c[i];
         let is_qwen_tmpl = k == "--chat-template-file" || k == "--chat-template-kwargs" || k == "--reasoning-budget";
-        if is_qwen_tmpl && !model.qwen_template_flags {
+        if is_qwen_tmpl && (!model.qwen_template_flags || shipped) {
             i += 2; continue;
         }
         f.push(expand(k));
         i += 1;
     }
-    if let Some(t) = &model.chat_template_file { f.extend(["--chat-template-file".to_string(), expand(t)]); }
+    if let (Some(t), false) = (&model.chat_template_file, shipped) { f.extend(["--chat-template-file".to_string(), expand(t)]); }
+    if let Some(d) = &cfg.device { f.extend(["--device".to_string(), d.clone()]); }
     f.extend(["-np".to_string(), cfg.np.to_string(), "-fa".into(), cfg.flash_attn.clone(), "-ctk".into(), cfg.cache_type_k.clone(), "-ctv".into(), cfg.cache_type_k.clone(), "-ub".into(), cfg.ubatch.to_string()]);
     f
 }
@@ -243,12 +276,14 @@ async fn run_async(a: RunArgs) -> anyhow::Result<()> {
             if a.only_config.as_deref().map(|x| x != cfg.id).unwrap_or(false) { continue; }
             let cell_path = a.out_dir.join(format!("{}-{}.json", m.alias, cfg.id));
             if cell_path.exists() { eprintln!("skip {} {} (exists)", m.alias, cfg.id); continue; }
-            let flags = server_flags(&study, m, cfg, a.port);
+            let model_file = resolved_model_file(m, cfg)?;
+            let model_file_sha256 = sha256_file(Path::new(&model_file)).ok();
+            let flags = server_flags(&study, m, cfg, a.port, &model_file);
             let log = a.scratch_dir.join(format!("server-{}-{}.log", m.alias, cfg.id));
             eprintln!("== {} {} : starting server", m.alias, cfg.id);
             let logf = std::fs::File::create(&log)?;
             let mut child = tokio::process::Command::new(&a.server).args(&flags).env("HIP_VISIBLE_DEVICES", &a.gpu).stdout(std::process::Stdio::null()).stderr(std::process::Stdio::from(logf)).kill_on_drop(true).spawn()?;
-            let mut cell = Cell { model: m.alias.clone(), configuration: cfg.clone(), server_flags: flags.clone(), started: false, start_error: None, benign_runs: vec![], benign_pairs: vec![], benign_self_agreement: None, first_divergence_chars: vec![], harmful_hashes: vec![], harmful_self_agreement: None, harmful_transcript_files: vec![] };
+            let mut cell = Cell { model: m.alias.clone(), configuration: cfg.clone(), server_flags: flags.clone(), model_file: model_file.clone(), model_file_sha256, started: false, start_error: None, benign_runs: vec![], benign_pairs: vec![], benign_self_agreement: None, first_divergence_chars: vec![], harmful_hashes: vec![], harmful_self_agreement: None, harmful_transcript_files: vec![] };
             match wait_healthy(&client, a.port, &mut child, &log).await {
                 Ok(()) => cell.started = true,
                 Err(e) => { cell.start_error = Some(e); }
