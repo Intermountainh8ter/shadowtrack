@@ -9,6 +9,7 @@
       "cache_type_k": "f16",
       "ubatch": 512,
       "cache_prompt": null,
+      "registered": true,
       "started": true,
       "start_error": null,
       "benign_self_agreement": {
@@ -55,6 +56,7 @@
       "cache_type_k": "f16",
       "ubatch": 512,
       "cache_prompt": null,
+      "registered": true,
       "started": true,
       "start_error": null,
       "benign_self_agreement": {
@@ -101,6 +103,7 @@
       "cache_type_k": "f16",
       "ubatch": 512,
       "cache_prompt": null,
+      "registered": true,
       "started": true,
       "start_error": null,
       "benign_self_agreement": {
@@ -147,6 +150,7 @@
       "cache_type_k": "f16",
       "ubatch": 512,
       "cache_prompt": null,
+      "registered": true,
       "started": true,
       "start_error": null,
       "benign_self_agreement": {
@@ -193,6 +197,7 @@
       "cache_type_k": "q8_0",
       "ubatch": 512,
       "cache_prompt": null,
+      "registered": true,
       "started": false,
       "start_error": "server exited during startup (exit status: 1): 0.02.915.330 E srv  llama_server: exiting due to model loading error | 0.02.513.386 I srv    operator(): operator(): cleaning up before exit... | 0.02.513.384 E srv    load_model: failed to create_context with model '/mnt/store1t/bench-gguf/downloads/Meta-Llama-3.1-8B-Instruct-Q8_0.gguf' | 0.02.513.380 E cmn  common_init_: failed to create context with model '/mnt/store1t/bench-gguf/downloads/Meta-Llama-3.1-8B-Instruct-Q8_0.gguf' | 0.02.513.377 E cmn  common_init_: failed to create context with model '/mnt/store1t/bench-gguf/downloads/Meta-Llama-3.1-8B-Instruct-Q8_0.gguf'",
       "benign_self_agreement": null,
@@ -212,6 +217,7 @@
       "cache_type_k": "q8_0",
       "ubatch": 512,
       "cache_prompt": null,
+      "registered": true,
       "started": false,
       "start_error": "server exited during startup (exit status: 1): 0.02.733.598 E srv  llama_server: exiting due to model loading error | 0.02.638.255 I srv    operator(): operator(): cleaning up before exit... | 0.02.638.252 E srv    load_model: failed to create_context with model '/mnt/store1t/bench-gguf/downloads/Meta-Llama-3.1-8B-Instruct-Q8_0.gguf' | 0.02.638.245 E cmn  common_init_: failed to create context with model '/mnt/store1t/bench-gguf/downloads/Meta-Llama-3.1-8B-Instruct-Q8_0.gguf' | 0.02.638.240 E cmn  common_init_: failed to create context with model '/mnt/store1t/bench-gguf/downloads/Meta-Llama-3.1-8B-Instruct-Q8_0.gguf'",
       "benign_self_agreement": null,
@@ -231,6 +237,7 @@
       "cache_type_k": "f16",
       "ubatch": 128,
       "cache_prompt": null,
+      "registered": true,
       "started": true,
       "start_error": null,
       "benign_self_agreement": {
@@ -277,6 +284,7 @@
       "cache_type_k": "f16",
       "ubatch": 512,
       "cache_prompt": false,
+      "registered": false,
       "started": true,
       "start_error": null,
       "benign_self_agreement": {
@@ -323,6 +331,7 @@
       "cache_type_k": "f16",
       "ubatch": 512,
       "cache_prompt": null,
+      "registered": true,
       "started": true,
       "start_error": null,
       "benign_self_agreement": {
@@ -369,6 +378,7 @@
       "cache_type_k": "f16",
       "ubatch": 512,
       "cache_prompt": null,
+      "registered": true,
       "started": true,
       "start_error": null,
       "benign_self_agreement": {
@@ -415,6 +425,7 @@
       "cache_type_k": "f16",
       "ubatch": 512,
       "cache_prompt": null,
+      "registered": true,
       "started": true,
       "start_error": null,
       "benign_self_agreement": {
@@ -461,6 +472,7 @@
       "cache_type_k": "f16",
       "ubatch": 512,
       "cache_prompt": null,
+      "registered": true,
       "started": true,
       "start_error": null,
       "benign_self_agreement": {
@@ -507,6 +519,7 @@
       "cache_type_k": "q8_0",
       "ubatch": 512,
       "cache_prompt": null,
+      "registered": true,
       "started": false,
       "start_error": "server exited during startup (exit status: 1): 0.02.152.805 E srv  llama_server: exiting due to model loading error | 0.01.917.344 I srv    operator(): operator(): cleaning up before exit... | 0.01.917.342 E srv    load_model: failed to create_context with model '/home/ammo/bench/gguf/qwen3-4b-stock-Q8_0.gguf' | 0.01.917.338 E cmn  common_init_: failed to create context with model '/home/ammo/bench/gguf/qwen3-4b-stock-Q8_0.gguf' | 0.01.917.334 E cmn  common_init_: failed to create context with model '/home/ammo/bench/gguf/qwen3-4b-stock-Q8_0.gguf'",
       "benign_self_agreement": null,
@@ -526,6 +539,7 @@
       "cache_type_k": "q8_0",
       "ubatch": 512,
       "cache_prompt": null,
+      "registered": true,
       "started": false,
       "start_error": "server exited during startup (exit status: 1): 0.02.048.080 E srv  llama_server: exiting due to model loading error | 0.01.837.202 I srv    operator(): operator(): cleaning up before exit... | 0.01.837.200 E srv    load_model: failed to create_context with model '/home/ammo/bench/gguf/qwen3-4b-stock-Q8_0.gguf' | 0.01.837.196 E cmn  common_init_: failed to create context with model '/home/ammo/bench/gguf/qwen3-4b-stock-Q8_0.gguf' | 0.01.837.193 E cmn  common_init_: failed to create context with model '/home/ammo/bench/gguf/qwen3-4b-stock-Q8_0.gguf'",
       "benign_self_agreement": null,
@@ -545,6 +559,7 @@
       "cache_type_k": "f16",
       "ubatch": 128,
       "cache_prompt": null,
+      "registered": true,
       "started": true,
       "start_error": null,
       "benign_self_agreement": {
@@ -591,6 +606,7 @@
       "cache_type_k": "f16",
       "ubatch": 512,
       "cache_prompt": false,
+      "registered": false,
       "started": true,
       "start_error": null,
       "benign_self_agreement": {
@@ -630,7 +646,7 @@
       ]
     }
   ],
-  "h1_single_slot_deterministic": "not supported: single-slot cells llama-3.1-8b-instruct C1 0.97 [0.94, 1.00]; llama-3.1-8b-instruct C3 0.98 [0.95, 1.00]; llama-3.1-8b-instruct C5 not run; llama-3.1-8b-instruct C8 1.00 [1.00, 1.00]; qwen3-4b-stock C1 0.96 [0.92, 0.99]; qwen3-4b-stock C3 0.98 [0.95, 1.00]; qwen3-4b-stock C5 not run; qwen3-4b-stock C8 1.00 [1.00, 1.00]",
+  "h1_single_slot_deterministic": "not supported: single-slot cells llama-3.1-8b-instruct C1 0.97 [0.94, 1.00]; llama-3.1-8b-instruct C3 0.98 [0.95, 1.00]; llama-3.1-8b-instruct C5 not run; qwen3-4b-stock C1 0.96 [0.92, 0.99]; qwen3-4b-stock C3 0.98 [0.95, 1.00]; qwen3-4b-stock C5 not run",
   "h2_batching_breaks_it": "not supported: 8-slot cells llama-3.1-8b-instruct C2 0.92 [0.86, 0.97]; llama-3.1-8b-instruct C4 0.93 [0.88, 0.98]; llama-3.1-8b-instruct C6 not run; llama-3.1-8b-instruct C7 0.94 [0.89, 0.98]; qwen3-4b-stock C2 0.96 [0.92, 0.99]; qwen3-4b-stock C4 0.92 [0.87, 0.97]; qwen3-4b-stock C6 not run; qwen3-4b-stock C7 0.93 [0.88, 0.98]",
   "h3_moves_the_score": "not supported (no pair of configurations differs by more than 3 pp): no comparable cells",
   "single_slot_flag_effects": {
