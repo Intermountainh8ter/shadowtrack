@@ -42,6 +42,9 @@ pub struct Configuration {
     pub flash_attn: String,
     pub cache_type_k: String,
     pub ubatch: u32,
+    /// Per-request `cache_prompt` sent to the server; None leaves the server default (on).
+    #[serde(default)]
+    pub cache_prompt: Option<bool>,
 }
 
 #[derive(Deserialize, Serialize, Clone)]
@@ -154,7 +157,7 @@ async fn wait_healthy(client: &reqwest::Client, port: u16, child: &mut tokio::pr
 }
 
 /// Submit every prompt in order with at most `concurrency` requests in flight.
-async fn run_set(client: &reqwest::Client, port: u16, prompts: &[(String, String)], max_tokens: u32, s: &Sampling, concurrency: usize, run: usize) -> RunOutputs {
+async fn run_set(client: &reqwest::Client, port: u16, prompts: &[(String, String)], max_tokens: u32, s: &Sampling, cache_prompt: Option<bool>, concurrency: usize, run: usize) -> RunOutputs {
     let started = std::time::Instant::now();
     let mut outputs = vec![String::new(); prompts.len()];
     let mut errors = vec![None; prompts.len()];
@@ -164,10 +167,11 @@ async fn run_set(client: &reqwest::Client, port: u16, prompts: &[(String, String
         if set.len() >= concurrency.max(1) {
             if let Some(Ok((j, r))) = set.join_next().await { match r { Ok(t) => outputs[j] = t, Err(e) => errors[j] = Some(e) } }
         }
-        let body = serde_json::json!({
+        let mut body = serde_json::json!({
             "messages": [{"role": "user", "content": prompt}],
             "max_tokens": max_tokens, "temperature": s.temperature, "top_p": s.top_p, "top_k": s.top_k, "seed": s.seed,
         });
+        if let Some(cp) = cache_prompt { body["cache_prompt"] = serde_json::json!(cp); }
         let c = client.clone(); let u = url.clone();
         set.spawn_local(async move {
             let r = async {
@@ -253,12 +257,12 @@ async fn run_async(a: RunArgs) -> anyhow::Result<()> {
                 let conc = if cfg.np > 1 { study.concurrency_for_np8 } else { 1 };
                 for run in 1..=study.runs_per_configuration {
                     eprintln!("   benign run {run} (concurrency {conc})");
-                    cell.benign_runs.push(run_set(&client, a.port, &benign_prompts, benign.max_tokens, &study.sampling, conc, run).await);
+                    cell.benign_runs.push(run_set(&client, a.port, &benign_prompts, benign.max_tokens, &study.sampling, cfg.cache_prompt, conc, run).await);
                 }
                 let mut harm_runs = Vec::new();
                 for run in 1..=study.runs_per_configuration {
                     eprintln!("   jailbreakbench run {run} (concurrency {conc})");
-                    let r = run_set(&client, a.port, &harmful_prompts, harmful.max_tokens, &study.sampling, conc, run).await;
+                    let r = run_set(&client, a.port, &harmful_prompts, harmful.max_tokens, &study.sampling, cfg.cache_prompt, conc, run).await;
                     cell.harmful_hashes.push(r.outputs.iter().map(|o| sha256_str(o)).collect());
                     let tpath = a.scratch_dir.join(format!("transcripts-{}-{}-run{run}.jsonl", m.alias, cfg.id));
                     let mut text = String::new();

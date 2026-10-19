@@ -19,7 +19,7 @@ struct CellIn {
     harmful_transcript_files: Vec<String>,
 }
 #[derive(Deserialize, Serialize, Clone)]
-struct Cfg { id: String, np: u32, flash_attn: String, cache_type_k: String, ubatch: u32 }
+struct Cfg { id: String, np: u32, flash_attn: String, cache_type_k: String, ubatch: u32, #[serde(default)] cache_prompt: Option<bool> }
 #[derive(Deserialize)]
 struct RunIn { outputs: Vec<String>, errors: Vec<Option<String>>, wall_s: f64 }
 
@@ -31,6 +31,7 @@ pub struct CellOut {
     pub flash_attn: String,
     pub cache_type_k: String,
     pub ubatch: u32,
+    pub cache_prompt: Option<bool>,
     pub started: bool,
     pub start_error: Option<String>,
     pub benign_self_agreement: Option<crate::SelfBaseline>,
@@ -101,7 +102,7 @@ pub fn analyze(dir: PathBuf, jailbreakreplay: PathBuf, grader: PathBuf, readme: 
         } else { (None, None) };
         if let Some(r) = c.benign_runs.first() { run1.insert((c.model.clone(), c.configuration.id.clone()), r.outputs.clone()); }
         cells.push(CellOut {
-            model: c.model.clone(), id: c.configuration.id.clone(), np: c.configuration.np, flash_attn: c.configuration.flash_attn.clone(), cache_type_k: c.configuration.cache_type_k.clone(), ubatch: c.configuration.ubatch,
+            model: c.model.clone(), id: c.configuration.id.clone(), np: c.configuration.np, flash_attn: c.configuration.flash_attn.clone(), cache_type_k: c.configuration.cache_type_k.clone(), ubatch: c.configuration.ubatch, cache_prompt: c.configuration.cache_prompt,
             started: c.started, start_error: c.start_error.clone(),
             benign_self_agreement: c.benign_self_agreement.clone(),
             benign_request_errors: c.benign_runs.iter().map(|r| r.errors.iter().filter(|e| e.is_some()).count()).sum(),
@@ -161,11 +162,11 @@ pub fn analyze(dir: PathBuf, jailbreakreplay: PathBuf, grader: PathBuf, readme: 
 
 fn render(s: &Summary) -> String {
     let mut t = String::new();
-    t.push_str("| Model | Config | Slots | Flash attn | KV cache | ubatch | Benign self-agreement (run 1 vs 2) | JBB self-agreement | JBB non-refusal run 1 | run 2 | First divergence (chars, median) |\n|---|---|---|---|---|---|---|---|---|---|---|\n");
+    t.push_str("| Model | Config | Slots | Flash attn | KV cache | ubatch | Prompt cache | Benign self-agreement (run 1 vs 2) | JBB self-agreement | JBB non-refusal run 1 | run 2 | First divergence (chars, median) |\n|---|---|---|---|---|---|---|---|---|---|---|---|\n");
     for c in &s.cells {
         let sa = |x: &Option<crate::SelfBaseline>| x.as_ref().map(|s| format!("{:.2} [{:.2}, {:.2}]", s.rate, s.ci_lo, s.ci_hi)).unwrap_or_else(|| c.start_error.clone().map(|e| format!("failed: {}", e.chars().take(40).collect::<String>())).unwrap_or("not run".into()));
         let r = |x: &Option<Rate>| x.as_ref().map(|r| format!("{:.2} [{:.2}, {:.2}]", r.rate, r.ci_lo, r.ci_hi)).unwrap_or("—".into());
-        t.push_str(&format!("| {} | {} | {} | {} | {} | {} | {} | {} | {} | {} | {} |\n", c.model, c.id, c.np, c.flash_attn, c.cache_type_k, c.ubatch, sa(&c.benign_self_agreement), sa(&c.harmful_self_agreement), r(&c.jbb_non_refusal_run1), r(&c.jbb_non_refusal_run2), c.first_divergence_chars_median.map(|m| format!("{m:.0}")).unwrap_or("—".into())));
+        t.push_str(&format!("| {} | {} | {} | {} | {} | {} | {} | {} | {} | {} | {} | {} |\n", c.model, c.id, c.np, c.flash_attn, c.cache_type_k, c.ubatch, c.cache_prompt.map(|b| if b { "on" } else { "off" }).unwrap_or("default (on)"), sa(&c.benign_self_agreement), sa(&c.harmful_self_agreement), r(&c.jbb_non_refusal_run1), r(&c.jbb_non_refusal_run2), c.first_divergence_chars_median.map(|m| format!("{m:.0}")).unwrap_or("—".into())));
     }
     t.push_str(&format!("\n| Pre-registered hypothesis | Verdict |\n|---|---|\n| H1 single slot is deterministic | {} |\n| H2 batching breaks it | {} |\n| H3 it moves the score | {} |\n", s.h1_single_slot_deterministic, s.h2_batching_breaks_it, s.h3_moves_the_score));
     t.push_str("\n| Model | Single-slot flag comparison (run 1, share of benign prompts byte-identical) |\n|---|---|\n");

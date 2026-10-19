@@ -1,27 +1,114 @@
 {
-  "study": "docs/STUDY-serving-determinism.md",
-  "server": "~/bench/llama.cpp/build-hip/bin/llama-server (commit recorded at run time)",
-  "common_flags": ["-ngl", "99", "-c", "8192", "--host", "127.0.0.1", "--jinja", "--reasoning-budget", "0",
-                   "--chat-template-file", "~/bench/gguf/qwen3-chat-template.jinja", "--chat-template-kwargs", "{\"enable_thinking\":false}"],
-  "models": [
-    {"alias": "qwen3-4b-stock", "file": "~/bench/gguf/qwen3-4b-stock-Q8_0.gguf", "qwen_template_flags": true},
-    {"alias": "llama-3.1-8b-instruct", "file": "/mnt/store1t/bench-gguf/downloads/Meta-Llama-3.1-8B-Instruct-Q8_0.gguf", "qwen_template_flags": false, "chat_template_file": "~/bench/gguf/llama31-chat-template.jinja"}
-  ],
-  "configurations": [
-    {"id": "C1", "np": 1, "flash_attn": "off", "cache_type_k": "f16", "ubatch": 512},
-    {"id": "C2", "np": 8, "flash_attn": "off", "cache_type_k": "f16", "ubatch": 512},
-    {"id": "C3", "np": 1, "flash_attn": "on",  "cache_type_k": "f16", "ubatch": 512},
-    {"id": "C4", "np": 8, "flash_attn": "on",  "cache_type_k": "f16", "ubatch": 512},
-    {"id": "C5", "np": 1, "flash_attn": "off", "cache_type_k": "q8_0", "ubatch": 512},
-    {"id": "C6", "np": 8, "flash_attn": "off", "cache_type_k": "q8_0", "ubatch": 512},
-    {"id": "C7", "np": 8, "flash_attn": "off", "cache_type_k": "f16", "ubatch": 128}
-  ],
-  "prompt_sets": {
-    "benign": {"path": "~/bench/.scratch/prompts/capability.jsonl", "n": 100, "grader": "exact", "max_tokens": 128},
-    "jailbreakbench": {"path": "~/bench/.scratch/prompts/jailbreakbench.jsonl", "n": 100, "grader": "jailbreakreplay grader v1", "max_tokens": 256}
+ "study": "docs/STUDY-serving-determinism.md",
+ "server": "~/bench/llama.cpp/build-hip/bin/llama-server (commit recorded at run time)",
+ "common_flags": [
+  "-ngl",
+  "99",
+  "-c",
+  "8192",
+  "--host",
+  "127.0.0.1",
+  "--jinja",
+  "--reasoning-budget",
+  "0",
+  "--chat-template-file",
+  "~/bench/gguf/qwen3-chat-template.jinja",
+  "--chat-template-kwargs",
+  "{\"enable_thinking\":false}"
+ ],
+ "models": [
+  {
+   "alias": "qwen3-4b-stock",
+   "file": "~/bench/gguf/qwen3-4b-stock-Q8_0.gguf",
+   "qwen_template_flags": true
   },
-  "sampling": {"temperature": 0.0, "top_p": 1.0, "top_k": 1, "seed": 42},
-  "runs_per_configuration": 2,
-  "concurrency_for_np8": 8,
-  "order": "one server at a time; the GPU is otherwise idle; configurations run C1..C7, both runs of a configuration back to back"
+  {
+   "alias": "llama-3.1-8b-instruct",
+   "file": "/mnt/store1t/bench-gguf/downloads/Meta-Llama-3.1-8B-Instruct-Q8_0.gguf",
+   "qwen_template_flags": false,
+   "chat_template_file": "~/bench/gguf/llama31-chat-template.jinja"
+  }
+ ],
+ "configurations": [
+  {
+   "id": "C1",
+   "np": 1,
+   "flash_attn": "off",
+   "cache_type_k": "f16",
+   "ubatch": 512
+  },
+  {
+   "id": "C2",
+   "np": 8,
+   "flash_attn": "off",
+   "cache_type_k": "f16",
+   "ubatch": 512
+  },
+  {
+   "id": "C3",
+   "np": 1,
+   "flash_attn": "on",
+   "cache_type_k": "f16",
+   "ubatch": 512
+  },
+  {
+   "id": "C4",
+   "np": 8,
+   "flash_attn": "on",
+   "cache_type_k": "f16",
+   "ubatch": 512
+  },
+  {
+   "id": "C5",
+   "np": 1,
+   "flash_attn": "off",
+   "cache_type_k": "q8_0",
+   "ubatch": 512
+  },
+  {
+   "id": "C6",
+   "np": 8,
+   "flash_attn": "off",
+   "cache_type_k": "q8_0",
+   "ubatch": 512
+  },
+  {
+   "id": "C7",
+   "np": 8,
+   "flash_attn": "off",
+   "cache_type_k": "f16",
+   "ubatch": 128
+  },
+  {
+   "id": "C8",
+   "np": 1,
+   "flash_attn": "off",
+   "cache_type_k": "f16",
+   "ubatch": 512,
+   "cache_prompt": false
+  }
+ ],
+ "prompt_sets": {
+  "benign": {
+   "path": "~/bench/.scratch/prompts/capability.jsonl",
+   "n": 100,
+   "grader": "exact",
+   "max_tokens": 128
+  },
+  "jailbreakbench": {
+   "path": "~/bench/.scratch/prompts/jailbreakbench.jsonl",
+   "n": 100,
+   "grader": "jailbreakreplay grader v1",
+   "max_tokens": 256
+  }
+ },
+ "sampling": {
+  "temperature": 0.0,
+  "top_p": 1.0,
+  "top_k": 1,
+  "seed": 42
+ },
+ "runs_per_configuration": 2,
+ "concurrency_for_np8": 8,
+ "order": "one server at a time; the GPU is otherwise idle; configurations run C1..C7, both runs of a configuration back to back"
 }

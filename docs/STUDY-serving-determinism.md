@@ -72,3 +72,20 @@ divergent token position in disagreeing pairs.
 
 Cross-stack comparison; sampled (temperature > 0) variance; longer outputs; effect on
 trialgauntlet pass^k.
+
+## Pilot cell C8: prompt cache off (added 2026-10-19, before it was run)
+
+The study above left single-slot self-agreement at 0.96 to 0.98 and did not say why. The untested
+explanation recorded at the time was llama-server's per-slot prompt cache: with `cache_prompt`
+on (the server default), run 2 can reuse run 1's KV prefix, and a prefix computed in one batch
+shape is not bit-identical to one computed in another. C8 is C1 with `cache_prompt: false` sent
+on every request and nothing else changed (one slot, flash attention off, f16 KV, ubatch 512).
+
+- **Prediction, registered now:** C8 benign self-agreement reaches a CI lower bound of at least
+  0.99 for both models. If it does, the prompt cache explains most of the single-slot
+  disagreement in C1. If it does not, the cause is elsewhere (kernel nondeterminism on this
+  backend), and that is reported as the result.
+- Same prompt sets, sampling, runs and graders as the other cells; the runner records the
+  `cache_prompt` value in the cell file and the README table gains a "Prompt cache" column.
+- This is a pilot for the error-budget study drafted in `~/Desktop/Research Deep Dive.md`; it
+  does not change H1 to H3 above, whose verdicts stand on C1 to C7.
