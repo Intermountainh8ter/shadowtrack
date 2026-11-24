@@ -33,3 +33,5 @@ path = "src/main.rs"
 [lib]
 name = "shadowtrack"
 path = "src/lib.rs"
+
+[workspace]
