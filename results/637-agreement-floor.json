@@ -1,0 +1,44 @@
+{
+  "degenerate": {
+    "constant_candidate": {
+      "agreement_rate": 0.96,
+      "ci_hi": 0.972,
+      "ci_lo": 0.947,
+      "safe_to_upgrade": true
+    },
+    "copy_candidate": {
+      "agreement_rate": 1.0,
+      "ci_hi": 1.0,
+      "ci_lo": 1.0,
+      "safe_to_upgrade": true
+    },
+    "uniform_candidate": {
+      "agreement_rate": 0.221,
+      "ci_hi": 0.248,
+      "ci_lo": 0.197,
+      "safe_to_upgrade": false
+    }
+  },
+  "fixture": {
+    "floor": 0.9,
+    "labels": 5,
+    "majority": 0.95,
+    "n": 1000,
+    "old_majority_share": 0.96
+  },
+  "provenance": {
+    "command": "cargo run --locked -q --release -- floor --n 1000 --majority 0.95 --labels 5 --boot 2000 --seed 7 --out results/637-agreement-floor.json",
+    "data_sources": [
+      {
+        "license": "MIT",
+        "url": "synthetic: seeded in-process generator, no external data"
+      }
+    ],
+    "hardware": "linux-x86_64 cpu, no gpu",
+    "seeds": [
+      7
+    ],
+    "started_at": "2026-11-27T06:32:57Z",
+    "wall_s": 0.178838674
+  }
+}

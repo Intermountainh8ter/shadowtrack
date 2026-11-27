@@ -102,6 +102,24 @@ enum Cmd {
         #[arg(long)]
         readme: Option<std::path::PathBuf>,
     },
+    /// Model-free degenerate-candidate floor: score constant, uniform-random and copy-of-old
+    /// candidates on a seeded skewed fixture.
+    Floor {
+        #[arg(long, default_value_t = 1000)]
+        n: usize,
+        #[arg(long, default_value_t = 0.95)]
+        majority: f64,
+        #[arg(long, default_value_t = 5)]
+        labels: usize,
+        #[arg(long, default_value_t = 2000)]
+        boot: usize,
+        #[arg(long, default_value_t = 7)]
+        seed: u64,
+        #[arg(long, default_value_t = 0.9)]
+        floor: f64,
+        #[arg(long)]
+        out: std::path::PathBuf,
+    },
     Version,
 }
 
@@ -203,6 +221,54 @@ fn main() -> anyhow::Result<()> {
             shadowtrack::determinism::run(shadowtrack::determinism::RunArgs { study, server, out_dir, scratch_dir, port, gpu, only_model, only_config, limit })?;
         }
         Cmd::DeterminismAnalyze { dir, jailbreakreplay, grader, readme } => shadowtrack::determinism_analyze::analyze(dir, jailbreakreplay, grader, readme)?,
+        Cmd::Floor { n, majority, labels, boot, seed, floor, out } => {
+            let t0 = std::time::Instant::now();
+            let secs = std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)?
+                .as_secs() as i64;
+            let (days, rem) = (secs.div_euclid(86400), secs.rem_euclid(86400));
+            let z = days + 719468;
+            let era = z.div_euclid(146097);
+            let doe = z - era * 146097;
+            let yoe = (doe - doe / 1460 + doe / 36524 - doe / 146096) / 365;
+            let doy = doe - (365 * yoe + yoe / 4 - yoe / 100);
+            let mp = (5 * doy + 2) / 153;
+            let d = doy - (153 * mp + 2) / 5 + 1;
+            let m = if mp < 10 { mp + 3 } else { mp - 9 };
+            let y = yoe + era * 400 + if m <= 2 { 1 } else { 0 };
+            let started_at = format!(
+                "{y:04}-{m:02}-{d:02}T{:02}:{:02}:{:02}Z",
+                rem / 3600,
+                rem % 3600 / 60,
+                rem % 60
+            );
+            let rep = shadowtrack::floor::run(n, majority, labels, floor, boot, seed);
+            let command = format!(
+                "cargo run --locked -q --release -- floor --n {n} --majority {majority} --labels {labels} --boot {boot} --seed {seed} --out {}",
+                out.display()
+            );
+            let doc = serde_json::json!({
+                "degenerate": {
+                    "constant_candidate": rep.constant_candidate,
+                    "uniform_candidate": rep.uniform_candidate,
+                    "copy_candidate": rep.copy_candidate,
+                },
+                "fixture": {
+                    "n": rep.n, "majority": rep.majority, "labels": rep.labels,
+                    "floor": rep.floor, "old_majority_share": rep.old_majority_share,
+                },
+                "provenance": {
+                    "started_at": started_at,
+                    "seeds": [seed],
+                    "command": command,
+                    "hardware": format!("{}-{} cpu, no gpu", std::env::consts::OS, std::env::consts::ARCH),
+                    "wall_s": t0.elapsed().as_secs_f64(),
+                    "data_sources": [{"url": "synthetic: seeded in-process generator, no external data", "license": "MIT"}],
+                },
+            });
+            std::fs::write(&out, serde_json::to_string_pretty(&doc)?)?;
+            println!("{}", serde_json::to_string_pretty(&doc["degenerate"])?);
+        }
         Cmd::Version => println!("shadowtrack {}", env!("CARGO_PKG_VERSION")),
     }
     Ok(())

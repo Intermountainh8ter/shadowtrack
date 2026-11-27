@@ -46,6 +46,14 @@ Not in this commit (openly tracked):
 
 MIT. See `LICENSE`.
 
+## Degenerate-candidate floor
+
+`shadowtrack floor` builds a seeded fixture whose old outputs are one majority label with probability 0.95
+(5 labels, 1000 prompts, seed 7) and scores three prompt-blind candidates with the normalized grader.
+Results in `results/637-agreement-floor.json`: a constant majority-label candidate reaches an agreement
+rate of 0.96 (95% CI [0.947, 0.972]) and passes the 0.9 safe-to-upgrade floor; a uniform-random candidate
+reaches 0.221 and fails. On a skewed fixture the verdict alone does not separate an upgrade from a degenerate candidate.
+
 ## Serving-determinism study, live
 
 Pre-registered in `docs/STUDY-serving-determinism.md`; configurations in `examples/determinism/configs.json`;
